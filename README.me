@@ -1,0 +1,18 @@
+Nginx Proxy
+
+### 创建本地网络
+    docker network create proxy
+
+### 修改配置文件(默认启用了ssl协议)
+    vi nginx/conf.d/vhost/mydomain.conf
+
+### 配置自己网站的ssl证书
+    nginx/conf.d/cert/server.crt
+    nginx/conf.d/cert/server.key
+
+### dhparam-2048.pem文件做成
+    openssl dhparam 2048 -out nginx/conf.d/dh-param/dhparam-2048
+
+***
+### **说明**
+    这个容器反向代理了gitlab服务，gitlab也是使用docker部署，因此需要一块部署gitlab容器。mydomain.conf可以自由定制

@@ -1,0 +1,23 @@
+version: '3.2'
+
+services:
+  nginx:
+    image: nginx:1.14.1-alpine
+    container_name: proxy_nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - proxy
+    volumes:
+      - "./nginx/dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem"
+      - "./nginx/conf.d:/etc/nginx/conf.d"
+      - "./nginx/html:/usr/share/nginx/html"
+      - "./nginx/logs:/var/log/nginx"
+    tmpfs:
+      - /tmp
+
+networks:
+  proxy:
+    external: true
